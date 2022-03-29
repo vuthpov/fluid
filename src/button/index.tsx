@@ -6,10 +6,12 @@ const StyledButton = styled.button`
   background: crimson;
 `;
 
-interface ButtonProps {}
+interface ButtonProps {
+  [index: string]: any;
+}
 
-const Button: React.FC<ButtonProps> = () => (
-  <StyledButton data-testid="button-component">
+const Button: React.FC<ButtonProps> = (props) => (
+  <StyledButton {...props}>
     <h1 className="heading">Button Pov</h1>
   </StyledButton>
 );
