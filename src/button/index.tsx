@@ -12,7 +12,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = (props) => (
   <StyledButton {...props}>
-    <h1 className="heading">Button Pov</h1>
+    <h1 className="heading">Button dd</h1>
   </StyledButton>
 );
 
