@@ -27,6 +27,6 @@ export default {
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ useTsconfigDeclarationDir: true,  exclude: ["**/__tests__", "**/*.test.tsx"] }),
+    typescript({ useTsconfigDeclarationDir: true,  exclude: ["**/__tests__", "**/*.test.*]"] }),
   ]
 };
