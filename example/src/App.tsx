@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Button } from 'fluid';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { Button, Input } from 'fluid'
 
 function App() {
   return (
@@ -19,10 +19,15 @@ function App() {
         >
           Learn React
         </a>
-        <Button />
+        <Input
+          label={'Username'}
+          description={'Please Input Your Username'}
+          errorMessage={'error'}
+        />
+        <Button>hello</Button>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

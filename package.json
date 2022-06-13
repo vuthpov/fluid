@@ -19,13 +19,11 @@
     "rollup": "^2.70.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.31.2",
-    "styled-components": "^5.3.5",
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "styled-components": "^5.3.5"
+    "react-dom": ">=16.8.0"
   },
   "main": "build/index.js",
   "files": [
@@ -39,5 +37,10 @@
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom"
+  },
+  "dependencies": {
+    "@react-aria/button": "^3.5.0",
+    "@react-aria/textfield": "^3.6.0",
+    "@stitches/react": "^1.2.8"
   }
 }
