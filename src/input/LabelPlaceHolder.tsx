@@ -7,11 +7,11 @@ const StyledLabelPlaceHolder = styled(`label`, {
   fontSize: '$xs',
   zIndex: 2,
   left: 6,
-  top: 18,
+  top: 4,
   cursor: 'auto',
 
   '&.input-focus': {
-    top: 0,
+    top: -17,
     left: 0,
     cursor: 'default',
   },

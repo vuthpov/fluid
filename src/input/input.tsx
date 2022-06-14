@@ -17,6 +17,12 @@ const StyledInput = styled(`input`, {
   zIndex: 1,
 })
 
+const Container = styled(`div`, {
+  display: 'flex',
+  flexDirection: 'column',
+  height: `calc(100% + 17px)`,
+})
+
 const Input: React.FC<Props> = (props) => {
   const { label, labelPlaceHolder, ...rest } = props
   let inputRef = React.useRef<HTMLInputElement>()
@@ -45,7 +51,15 @@ const Input: React.FC<Props> = (props) => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <Container>
+      {labelPlaceHolder && (
+        <div
+          style={{
+            height: inputRef.current?.offsetHeight,
+          }}
+        />
+      )}
+
       {label && <label {...labelProps}>{label}</label>}
       <InputContainer>
         {labelPlaceHolder && (
@@ -77,7 +91,7 @@ const Input: React.FC<Props> = (props) => {
           {props.errorMessage}
         </div>
       )}
-    </div>
+    </Container>
   )
 }
 
