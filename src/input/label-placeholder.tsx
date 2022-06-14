@@ -7,14 +7,18 @@ const StyledLabelPlaceHolder = styled(`label`, {
   fontSize: '$xs',
   zIndex: 2,
   left: 6,
-  top: 4,
+  top: 20,
   cursor: 'auto',
 
   '&.input-focus': {
-    top: -17,
+    top: 0,
     left: 0,
     cursor: 'default',
   },
+})
+
+const PlaceHolderGap = styled(`div`, {
+  height: `$xs`,
 })
 
 interface Props
@@ -25,7 +29,12 @@ interface Props
 
 const LabelPlaceHolder = React.forwardRef<HTMLLabelElement, Props>(
   (props, ref) => {
-    return <StyledLabelPlaceHolder {...(props as any)} ref={ref} />
+    return (
+      <>
+        <PlaceHolderGap />
+        <StyledLabelPlaceHolder {...(props as any)} ref={ref} />
+      </>
+    )
   },
 )
 

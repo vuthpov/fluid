@@ -1573,6 +1573,19 @@
     "@react-types/shared" "^3.13.0"
     "@react-types/textfield" "^3.5.0"
 
+"@react-aria/tooltip@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/tooltip/-/tooltip-3.2.0.tgz#a7336242a0a80a859b75e42c8fff7ac889bf8bbb"
+  integrity sha512-JnchvAwt3N+F76gfpxfRLoHU2FRI8hUfMKr1CrcmLGJs996kINiBSIsETobTZhLnPzYk+pLZ26ZoqJYjP1bJwg==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.6.0"
+    "@react-aria/interactions" "^3.9.0"
+    "@react-aria/utils" "^3.13.0"
+    "@react-stately/tooltip" "^3.1.0"
+    "@react-types/shared" "^3.13.0"
+    "@react-types/tooltip" "^3.2.0"
+
 "@react-aria/utils@^3.13.0":
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.13.0.tgz#a9523a9d4b19839601753749b65e19ac0ad5ca86"
@@ -1584,6 +1597,15 @@
     "@react-types/shared" "^3.13.0"
     clsx "^1.1.1"
 
+"@react-stately/overlays@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@react-stately/overlays/-/overlays-3.3.0.tgz#1775807fef9f49aedfca344c6db6cc89103638da"
+  integrity sha512-x8ASMyhib7mL4ITgZQXUaTGGkFPZz4qPJVThdx9i6q1iu0CpO7hXpPxzrUFKPV+JV/fyXlWbo3n7tWBE2yHTVw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.5.0"
+    "@react-types/overlays" "^3.6.0"
+
 "@react-stately/toggle@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@react-stately/toggle/-/toggle-3.3.0.tgz#9330d57f0d4ae9f2c32009851fdcde546fc2db73"
@@ -1593,6 +1615,16 @@
     "@react-stately/utils" "^3.5.0"
     "@react-types/checkbox" "^3.3.0"
     "@react-types/shared" "^3.13.0"
+
+"@react-stately/tooltip@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-stately/tooltip/-/tooltip-3.1.0.tgz#3bfbbe6e07f7d570d703921b5d7de03e39063ab5"
+  integrity sha512-Wg7nF7sb1tiMNiLq0tDYBqUhqb2tBZS6ORTPOey1YoOI/wh4QB1OalCC62a3dzFjdv5dhnThdai3d4X1AXya0A==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/overlays" "^3.3.0"
+    "@react-stately/utils" "^3.5.0"
+    "@react-types/tooltip" "^3.2.0"
 
 "@react-stately/utils@^3.5.0":
   version "3.5.0"
@@ -1622,6 +1654,13 @@
   dependencies:
     "@react-types/shared" "^3.13.0"
 
+"@react-types/overlays@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@react-types/overlays/-/overlays-3.6.0.tgz#2aed36e3cbdf6eab355dec094ea4934b9f559945"
+  integrity sha512-atoRgctzNHxWE4qhI2YLI/0Y9bicsib3EnaliV0jUQf2oJMr0S8yKVwwx+K0ENh9Ah00XBEFQxkjgP1q3xQQYw==
+  dependencies:
+    "@react-types/shared" "^3.13.0"
+
 "@react-types/shared@^3.13.0":
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.13.0.tgz#01ef4312886ed8d449065f44168e2bfd3134acb7"
@@ -1632,6 +1671,14 @@
   resolved "https://registry.yarnpkg.com/@react-types/textfield/-/textfield-3.5.0.tgz#652c5ab2564a3499692268d5153bd369423be367"
   integrity sha512-luwzw+nC0qR7pyhofPQxySzew26bvuS2mpsUQ3Ho56X9i8eGQkhJYIawLu4QIQC79cso4Fe7P9GB146cfRWjVA==
   dependencies:
+    "@react-types/shared" "^3.13.0"
+
+"@react-types/tooltip@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-types/tooltip/-/tooltip-3.2.0.tgz#5ccfb34927a7a07d18068a6c558a79b117ed110d"
+  integrity sha512-q/AHHTOfIYEkmfNwanphgWlcR0R2OKXW5zWXT2KsxQlYXUSqPDxGys044UCCnHgnUS64ihvzJFFmHOc3pgH4Yg==
+  dependencies:
+    "@react-types/overlays" "^3.6.0"
     "@react-types/shared" "^3.13.0"
 
 "@rollup/plugin-babel@^5.2.0":

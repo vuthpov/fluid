@@ -38,5 +38,11 @@ export const {
       xl8: "6rem",
       xl9: "8rem",
     },
+    sizes: {
+      xs: "1rem",
+    },
+    space: {
+      xs: "1rem",
+    },
   },
 });

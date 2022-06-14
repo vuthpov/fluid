@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useImperativeHandle, useRef } from 'react'
 import { AriaTextFieldOptions, useTextField } from '@react-aria/textfield'
 import { styled } from '../theme/stitches.config'
-import StyledLabelPlaceHolder from './LabelPlaceHolder'
+import StyledLabelPlaceHolder from './label-placeholder'
 
 interface Props extends AriaTextFieldOptions<'input'> {
   labelPlaceHolder?: string
@@ -23,9 +23,9 @@ const Container = styled(`div`, {
   height: `calc(100% + 17px)`,
 })
 
-const Input: React.FC<Props> = (props) => {
+const Input: React.FC<Props> = React.forwardRef((props, ref) => {
   const { label, labelPlaceHolder, ...rest } = props
-  let inputRef = React.useRef<HTMLInputElement>()
+  let inputRef = React.useRef<HTMLInputElement>(null)
 
   let {
     labelProps,
@@ -33,6 +33,8 @@ const Input: React.FC<Props> = (props) => {
     descriptionProps,
     errorMessageProps,
   } = useTextField({ ...rest }, inputRef)
+
+  useImperativeHandle(ref, () => inputRef.current)
 
   const labelPlaceHolderRef = useRef<HTMLLabelElement>(null)
 
@@ -50,30 +52,31 @@ const Input: React.FC<Props> = (props) => {
     }
   }
 
+  console.log(inputRef)
+
   return (
     <Container>
-      {labelPlaceHolder && (
-        <div
-          style={{
-            height: inputRef.current?.offsetHeight,
-          }}
-        />
-      )}
-
       {label && <label {...labelProps}>{label}</label>}
       <InputContainer>
         {labelPlaceHolder && (
-          <StyledLabelPlaceHolder
-            {...labelProps}
-            ref={labelPlaceHolderRef}
-            onClick={(e) => {
-              labelProps.onClick?.(e)
-              inputRef.current?.focus()
-              labelPlaceHolderRef.current?.classList.add('input-focus')
-            }}
-          >
-            {labelPlaceHolder}
-          </StyledLabelPlaceHolder>
+          <>
+            <div
+              style={{
+                height: inputRef.current?.offsetHeight,
+              }}
+            />
+            <StyledLabelPlaceHolder
+              {...labelProps}
+              ref={labelPlaceHolderRef}
+              onClick={(e) => {
+                labelProps.onClick?.(e)
+                inputRef.current?.focus()
+                labelPlaceHolderRef.current?.classList.add('input-focus')
+              }}
+            >
+              {labelPlaceHolder}
+            </StyledLabelPlaceHolder>
+          </>
         )}
 
         <StyledInput
@@ -93,6 +96,6 @@ const Input: React.FC<Props> = (props) => {
       )}
     </Container>
   )
-}
+})
 
 export default Input
