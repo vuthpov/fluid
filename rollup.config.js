@@ -13,6 +13,7 @@ export default {
       format: "cjs",
       sourcemap: true,
       file: packageJson.main,
+      exports: "named",
     },
     // {
     //   format: "cjs",
