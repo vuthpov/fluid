@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "author": "vuthpov",
+  "type": "module",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-multi-entry": "^4.1.0",
