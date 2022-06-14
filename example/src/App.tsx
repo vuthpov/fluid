@@ -24,7 +24,8 @@ function App() {
           description={'Please Input Your Username'}
           errorMessage={'error'}
         />
-        <Button>hello</Button>
+        <Button size={'small'}>hello</Button>
+        <Button size={'large'}>hello</Button>
       </header>
     </div>
   )
