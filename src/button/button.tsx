@@ -1,7 +1,7 @@
 import React from 'react'
 import { useButton } from '@react-aria/button'
 import type { AriaButtonProps } from '@react-types/button'
-import { styled } from '@stitches/react'
+import { styled } from '../theme/stitches.config'
 import Ripple from '../ripple'
 import useDrip from '../hooks/useDrip'
 

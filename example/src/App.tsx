@@ -20,12 +20,10 @@ function App() {
           Learn React
         </a>
         <Input
-          label={'Username'}
+          labelPlaceHolder={'Username'}
           description={'Please Input Your Username'}
           errorMessage={'error'}
         />
-        <Button size={'small'}>hello</Button>
-        <Button size={'large'}>hello</Button>
       </header>
     </div>
   )

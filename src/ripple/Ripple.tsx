@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { keyframes, styled } from '@stitches/react'
+import { keyframes, styled } from '../theme/stitches.config'
 
 interface Props
   extends React.DetailedHTMLProps<
