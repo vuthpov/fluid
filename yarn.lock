@@ -1554,6 +1554,18 @@
     "@react-types/label" "^3.6.0"
     "@react-types/shared" "^3.13.0"
 
+"@react-aria/link@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/@react-aria/link/-/link-3.3.0.tgz#362ae2746e3f25c6b02faa3bdd0c8c12f29ce5b0"
+  integrity sha512-D/3g6YsyIb1bYkWmphCVLrd22op/Yc8bu1mdejYigXpNJpTZVZwjyOgzMYkzuGHDKF/5hy+Nc33RrKarPaZwnQ==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.6.0"
+    "@react-aria/interactions" "^3.9.0"
+    "@react-aria/utils" "^3.13.0"
+    "@react-types/link" "^3.3.0"
+    "@react-types/shared" "^3.13.0"
+
 "@react-aria/ssr@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@react-aria/ssr/-/ssr-3.2.0.tgz#88460384b43204f91c972d5b0de24ee44d6a2984"
@@ -1620,6 +1632,14 @@
   resolved "https://registry.yarnpkg.com/@react-types/label/-/label-3.6.0.tgz#62dfbc21b23b1d69e9913e97a8d41c9eb1e25572"
   integrity sha512-3P0DOe2wToPpB/fpAZizktpoImTuAuvnnGQOn+lleNUAMp4zbfI2rfGxw0oByOQiKqg7kCVRe1/mw2puKM8p+Q==
   dependencies:
+    "@react-types/shared" "^3.13.0"
+
+"@react-types/link@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/@react-types/link/-/link-3.3.0.tgz#5d8fcc80c07b163f1674a30eb324b8f4ffee622d"
+  integrity sha512-R7rtz47Il2OAPF01RXXWVb4DSahBk9YBSgBEbditH8H+UBeG7pr3pKyOdWD/wJgzOpIJYeNSho46iV0+9j+Mrw==
+  dependencies:
+    "@react-aria/interactions" "^3.9.0"
     "@react-types/shared" "^3.13.0"
 
 "@react-types/shared@^3.13.0":

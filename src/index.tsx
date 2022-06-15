@@ -1,4 +1,4 @@
 import Button from './button'
 import Input from './input'
-
-export { Button, Input }
+import Link from './link/link'
+export { Link,Button, Input }

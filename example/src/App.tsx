@@ -1,4 +1,4 @@
-import { Button, Input } from 'fluid'
+import { Button, Input, Link } from 'fluid'
 
 function App() {
   return (
@@ -9,7 +9,9 @@ function App() {
           description={'Please Input Your Username'}
           errorMessage={'error'}
         />
+        
         <Button>Hello</Button>
+        <Link href="https://youtube.com" target="_blank">Youtube</Link>
       </header>
     </div>
   )
