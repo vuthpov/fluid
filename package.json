@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@react-aria/button": "^3.5.0",
+    "@react-aria/link": "^3.3.0",
     "@react-aria/textfield": "^3.6.0",
     "@react-aria/tooltip": "^3.2.0",
     "@stitches/react": "^1.2.8"
