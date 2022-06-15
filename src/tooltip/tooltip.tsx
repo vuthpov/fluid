@@ -1,60 +1,99 @@
-//@ts-nocheck
-import React from 'react'
+import React, { useImperativeHandle, useRef, useState } from 'react'
 import { useTooltip, useTooltipTrigger } from '@react-aria/tooltip'
 import { mergeProps } from '@react-aria/utils'
 import { useTooltipTriggerState } from '@react-stately/tooltip'
 import { TooltipTriggerProps } from '@react-types/tooltip'
+import CssTransition from '../utils/css-transition'
 
-const Tooltip = ({ state, ...props }) => {
+const Tooltip = ({ state, visible, ...props }) => {
   let { tooltipProps } = useTooltip(props, state)
 
   return (
-    <span
-      style={{
-        position: 'absolute',
-        left: '5px',
-        top: '100%',
-        marginTop: '10px',
-        backgroundColor: 'white',
-        color: 'black',
-        padding: '5px',
-      }}
-      {...mergeProps(props, tooltipProps)}
-    >
-      {props.children}
-    </span>
+    <CssTransition visible={visible} leaveTime={90}>
+      <span
+        {...mergeProps(props, tooltipProps)}
+        style={{
+          position: 'absolute',
+          top: 'calc(100% + 10px)',
+          color: 'black',
+          left: 0,
+        }}
+      >
+        {props.children}
+      </span>
+    </CssTransition>
   )
 }
 
-interface Props extends TooltipTriggerProps {
+type TriggerType = 'hover' | 'click'
+
+type ToolTipAria = Omit<TooltipTriggerProps, 'isOpen' | 'trigger'>
+
+interface Props
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  > {
   content: React.ReactNode
+  trigger?: TriggerType
+  children: React.ReactNode
 }
 
-const Wrapper: React.FC<Props> = React.forwardRef((props) => {
-  const { children, content } = props
+type ToolTipProps = Props & ToolTipAria
 
-  let state = useTooltipTriggerState(props)
-  let ref = React.useRef()
+const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
+  const { children, content, trigger = 'hover', ...rest } = props
 
-  // Get props for the trigger and its tooltip
-  let { triggerProps, tooltipProps } = useTooltipTrigger(props, state, ref)
+  const tooltipRef = useRef()
 
-  console.log(props)
+  const [visible, setVisible] = useState(false)
+
+  let state = useTooltipTriggerState({
+    ...rest,
+    isOpen: visible,
+  })
+
+  let { triggerProps, tooltipProps } = useTooltipTrigger(
+    {
+      ...rest,
+    },
+    state,
+    tooltipRef,
+  )
+
+  const changeVisible = (visible) => {
+    setVisible(visible)
+  }
+
+  const onMouseEnter = (e) => {
+    changeVisible(true)
+    props.onMouseEnter?.(e)
+  }
+
+  const onMouseLeave = (e) => {
+    changeVisible(false)
+    props.onMouseLeave?.(e)
+  }
+
+  const onClick = (e) => {
+    changeVisible(true)
+    props.onClick?.(e)
+  }
+
   return (
-    <span style={{ position: 'relative' }}>
-      {React.Children.map(children, (child: any) => {
-        return React.cloneElement(child, {
-          ...child.props,
-          ...triggerProps,
-          ref,
-        })
-      })}
+    <span
+      {...triggerProps}
+      style={{ position: 'relative', userSelect: 'auto' }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      ref={tooltipRef}
+    >
+      {children}
 
-      {state.isOpen && (
-        <Tooltip state={state} {...tooltipProps}>
-          {content}
-        </Tooltip>
-      )}
+      <Tooltip state={state} {...tooltipProps} visible={state.isOpen}>
+        {content}
+      </Tooltip>
     </span>
   )
 })

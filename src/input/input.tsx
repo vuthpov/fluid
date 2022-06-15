@@ -52,19 +52,12 @@ const Input: React.FC<Props> = React.forwardRef((props, ref) => {
     }
   }
 
-  console.log(inputRef)
-
   return (
     <Container>
       {label && <label {...labelProps}>{label}</label>}
       <InputContainer>
         {labelPlaceHolder && (
           <>
-            <div
-              style={{
-                height: inputRef.current?.offsetHeight,
-              }}
-            />
             <StyledLabelPlaceHolder
               {...labelProps}
               ref={labelPlaceHolderRef}
