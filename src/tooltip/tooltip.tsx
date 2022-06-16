@@ -14,6 +14,7 @@ import {
   generateOffset,
 } from './placement'
 import withDefault from '../utils/with-default'
+import useClickAway from '../hooks/useClickAway'
 
 const Tooltip = ({ state, visible, style, ...props }) => {
   let { tooltipProps } = useTooltip(props, state)
@@ -143,6 +144,15 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     }
     props.onClick?.(e)
   }
+
+  useClickAway({
+    ref: tooltipRef,
+    callback: () => {
+      if (trigger == 'click') {
+        changeVisible(false)
+      }
+    },
+  })
 
   return (
     <StyledTrigger
