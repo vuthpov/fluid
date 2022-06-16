@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTooltip, useTooltipTrigger } from '@react-aria/tooltip'
 import { mergeProps } from '@react-aria/utils'
 import { useTooltipTriggerState } from '@react-stately/tooltip'
@@ -6,8 +6,16 @@ import { TooltipTriggerProps } from '@react-types/tooltip'
 import CssTransition from '../utils/css-transition'
 import genId from '../utils/genId'
 import { styled } from '../theme/stitches.config'
+import {
+  Offset,
+  PlacementType,
+  placementOffset,
+  parentOffset,
+  generateOffset,
+} from './placement'
+import withDefault from '../utils/with-default'
 
-const Tooltip = ({ state, visible, ...props }) => {
+const Tooltip = ({ state, visible, style, ...props }) => {
   let { tooltipProps } = useTooltip(props, state)
 
   return (
@@ -16,9 +24,12 @@ const Tooltip = ({ state, visible, ...props }) => {
         {...mergeProps(props, tooltipProps)}
         style={{
           position: 'absolute',
-          top: 'calc(100% + 10px)',
-          color: 'black',
-          left: 0,
+          top: style.top,
+          bottom: style.bottom,
+          left: style.left,
+          right: style.right,
+          height: 'fit-content',
+          width: 'fit-content',
         }}
       >
         {props.children}
@@ -39,6 +50,8 @@ interface Props
   content: React.ReactNode
   trigger?: TriggerType
   children: React.ReactNode
+  placement?: PlacementType
+  offset?: Offset
 }
 
 type ToolTipProps = Props & ToolTipAria
@@ -47,8 +60,26 @@ const StyledTrigger = styled(`span`, {
   position: 'relative',
 })
 
+const defaultProps: Partial<Props> = {
+  trigger: 'hover',
+  offset: {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  placement: 'top',
+}
+
 const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
-  const { children, content, trigger = 'hover', ...rest } = props
+  const {
+    children,
+    content,
+    trigger,
+    placement,
+    offset: _offset,
+    ...rest
+  } = props
 
   const id = genId()
 
@@ -58,7 +89,6 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
 
   let state = useTooltipTriggerState({
     ...rest,
-
     isOpen: visible,
   })
 
@@ -70,8 +100,24 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     tooltipRef,
   )
 
-  const changeVisible = (visible) => {
-    setVisible(visible)
+  const [offset, setOffset] = useState<Offset>({
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  })
+
+  const changeVisible = (nextVisible) => {
+    if (nextVisible) {
+      setOffset(
+        generateOffset({
+          initial: placementOffset[placement](_offset),
+          offset: parentOffset[placement](tooltipRef.current),
+        }),
+      )
+    }
+
+    setVisible(nextVisible)
   }
 
   const onMouseEnter: React.MouseEventHandler<HTMLSpanElement> = (e) => {
@@ -111,11 +157,16 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
         })
       })}
 
-      <Tooltip state={state} {...tooltipProps} visible={state.isOpen}>
+      <Tooltip
+        state={state}
+        {...tooltipProps}
+        visible={state.isOpen}
+        style={offset}
+      >
         {content}
       </Tooltip>
     </StyledTrigger>
   )
 })
 
-export default Wrapper
+export default withDefault(Wrapper, defaultProps)
