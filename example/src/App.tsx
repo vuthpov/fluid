@@ -28,9 +28,16 @@ function App() {
           <Button>click</Button>
         </ToolTip>
 
-        {/* //@ts-ignore */}
         <ToolTip content={'Tooltip'} placement={'bottom'}>
           <Button>bottom</Button>
+        </ToolTip>
+
+        <ToolTip content={'Tooltip'} placement={'left'}>
+          <Button>Left</Button>
+        </ToolTip>
+
+        <ToolTip content={'Tooltip'} placement={'right'}>
+          <Button>Right</Button>
         </ToolTip>
       </header>
     </div>

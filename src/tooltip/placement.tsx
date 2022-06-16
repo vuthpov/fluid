@@ -5,7 +5,7 @@ export interface Offset {
   right: number
 }
 
-export type PlacementType = 'top' | 'bottom'
+export type PlacementType = 'top' | 'bottom' | 'left' | 'right'
 
 export const generateOffset = (args: {
   offset: Partial<Offset>
@@ -44,6 +44,20 @@ const placementBottom: Offset = {
   right: 0,
 }
 
+const placementLeft: Offset = {
+  top: 0,
+  bottom: 0,
+  left: 10,
+  right: 0,
+}
+
+const placementRight: Offset = {
+  top: 0,
+  bottom: 0,
+  left: 10,
+  right: 0,
+}
+
 const placementOffset: {
   [index in PlacementType]: (offset: Partial<Offset>) => Offset
 } = {
@@ -53,10 +67,23 @@ const placementOffset: {
       initial: placementTop,
     })
   },
+
   bottom: (value) => {
     return generateOffset({
       offset: value,
       initial: placementBottom,
+    })
+  },
+  left: (value) => {
+    return generateOffset({
+      offset: value,
+      initial: placementLeft,
+    })
+  },
+  right: (value) => {
+    return generateOffset({
+      offset: value,
+      initial: placementRight,
     })
   },
 }
@@ -76,6 +103,19 @@ const parentOffset: {
     const result = -el.offsetHeight
     return {
       top: result,
+    }
+  },
+  left: (el) => {
+    const rect = el.getBoundingClientRect()
+    const result = -el.offsetWidth - rect.width
+    return {
+      left: result,
+    }
+  },
+  right: (el) => {
+    const result = el.offsetWidth
+    return {
+      left: result,
     }
   },
 }
