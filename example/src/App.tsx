@@ -27,6 +27,11 @@ function App() {
         <ToolTip content={'Tooltip'} trigger={'click'}>
           <Button>click</Button>
         </ToolTip>
+
+        {/* //@ts-ignore */}
+        <ToolTip content={'Tooltip'} placement={'bottom'}>
+          <Button>bottom</Button>
+        </ToolTip>
       </header>
     </div>
   )

@@ -66,7 +66,7 @@ const parentOffset: {
 } = {
   bottom: (el) => {
     const rect = el.getBoundingClientRect()
-    const result = rect.height + el.offsetHeight
+    const result = rect.height
 
     return {
       top: result,
