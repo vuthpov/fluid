@@ -45,5 +45,6 @@
     "@react-aria/tooltip": "^3.2.0",
     "@stitches/react": "^1.2.8",
     "uuid": "^8.3.2"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
