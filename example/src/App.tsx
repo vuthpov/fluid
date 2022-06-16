@@ -9,7 +9,6 @@ function App() {
           description={'Please Input Your Username'}
           errorMessage={'error'}
         />
-
         <Button
           onMouseEnter={(e) => {
             console.log('focus')
@@ -18,10 +17,15 @@ function App() {
             console.log('focus')
           }}
         >
-          Hover
+          Button
         </Button>
+
         <ToolTip content={'Tooltip'}>
           <Button>Hover</Button>
+        </ToolTip>
+
+        <ToolTip content={'Tooltip'} trigger={'click'}>
+          <Button>click</Button>
         </ToolTip>
       </header>
     </div>

@@ -1,9 +1,11 @@
-import React, { useImperativeHandle, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTooltip, useTooltipTrigger } from '@react-aria/tooltip'
 import { mergeProps } from '@react-aria/utils'
 import { useTooltipTriggerState } from '@react-stately/tooltip'
 import { TooltipTriggerProps } from '@react-types/tooltip'
 import CssTransition from '../utils/css-transition'
+import genId from '../utils/genId'
+import { styled } from '../theme/stitches.config'
 
 const Tooltip = ({ state, visible, ...props }) => {
   let { tooltipProps } = useTooltip(props, state)
@@ -41,15 +43,22 @@ interface Props
 
 type ToolTipProps = Props & ToolTipAria
 
+const StyledTrigger = styled(`span`, {
+  position: 'relative',
+})
+
 const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
   const { children, content, trigger = 'hover', ...rest } = props
 
-  const tooltipRef = useRef()
+  const id = genId()
+
+  const tooltipRef = useRef<HTMLElement>(document.getElementById(id))
 
   const [visible, setVisible] = useState(false)
 
   let state = useTooltipTriggerState({
     ...rest,
+
     isOpen: visible,
   })
 
@@ -65,36 +74,47 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     setVisible(visible)
   }
 
-  const onMouseEnter = (e) => {
-    changeVisible(true)
+  const onMouseEnter: React.MouseEventHandler<HTMLSpanElement> = (e) => {
+    if (trigger == 'hover') {
+      changeVisible(true)
+    }
+
     props.onMouseEnter?.(e)
   }
 
   const onMouseLeave = (e) => {
-    changeVisible(false)
+    if (trigger == 'hover') {
+      changeVisible(false)
+    }
+
     props.onMouseLeave?.(e)
   }
 
   const onClick = (e) => {
-    changeVisible(true)
+    if (trigger == 'click') {
+      changeVisible(!visible)
+    }
     props.onClick?.(e)
   }
 
   return (
-    <span
+    <StyledTrigger
       {...triggerProps}
-      style={{ position: 'relative', userSelect: 'auto' }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onClick}
       ref={tooltipRef}
     >
-      {children}
+      {React.Children.map(children, (child: any) => {
+        return React.cloneElement(child, {
+          ...child.props,
+          onClick,
+        })
+      })}
 
       <Tooltip state={state} {...tooltipProps} visible={state.isOpen}>
         {content}
       </Tooltip>
-    </span>
+    </StyledTrigger>
   )
 })
 
