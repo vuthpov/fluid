@@ -25,6 +25,7 @@ const Tooltip = ({ state, visible, style, ...props }) => {
         style={{
           position: 'absolute',
           top: style.top,
+          zIndex: 2,
           bottom: style.bottom,
           left: style.left,
           right: style.right,

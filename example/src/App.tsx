@@ -3,7 +3,7 @@ import { Button, Input, ToolTip } from 'fluid'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <Input
           labelPlaceHolder={'Username'}
           description={'Please Input Your Username'}
@@ -31,15 +31,17 @@ function App() {
         <ToolTip content={'Tooltip'} placement={'bottom'}>
           <Button>bottom</Button>
         </ToolTip>
-
-        <ToolTip content={'Tooltip'} placement={'left'}>
-          <Button>Left</Button>
-        </ToolTip>
-
-        <ToolTip content={'Tooltip'} placement={'right'}>
+      </div>
+      <div
+        style={{
+          marginLeft: 100,
+        }}
+      >
+        <ToolTip content={'Tooltip'} placement={'right'} trigger={'click'}>
           <Button>Right</Button>
         </ToolTip>
-      </header>
+        <Button>Left</Button>
+      </div>
     </div>
   )
 }
