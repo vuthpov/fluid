@@ -88,6 +88,40 @@ const placementOffset: {
   },
 }
 
+export const offsetOutOfBound: {
+  [index in PlacementType]: (
+    rect: DOMRect,
+  ) => {
+    outOfBound: boolean
+    opposite: PlacementType
+  }
+} = {
+  top: (rect) => {
+    return {
+      outOfBound: -rect.y + rect.height < window.innerHeight,
+      opposite: 'bottom',
+    }
+  },
+  bottom: (rect) => {
+    return {
+      outOfBound: rect.y + rect.height > window.innerHeight,
+      opposite: 'top',
+    }
+  },
+  left: (rect) => {
+    return {
+      outOfBound: -rect.x - rect.width < window.innerWidth,
+      opposite: 'right',
+    }
+  },
+  right: (rect) => {
+    return {
+      outOfBound: rect.x + rect.width > window.innerWidth,
+      opposite: 'left',
+    }
+  },
+}
+
 const parentOffset: {
   [index in PlacementType]: (el: HTMLElement) => Partial<Offset>
 } = {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTooltip, useTooltipTrigger } from '@react-aria/tooltip'
 import { mergeProps } from '@react-aria/utils'
 import { useTooltipTriggerState } from '@react-stately/tooltip'
@@ -12,12 +12,50 @@ import {
   placementOffset,
   parentOffset,
   generateOffset,
+  offsetOutOfBound,
 } from './placement'
 import withDefault from '../utils/with-default'
 import useClickAway from '../hooks/useClickAway'
 
-const Tooltip = ({ state, visible, style, ...props }) => {
+const Tooltip = ({ state, visible, placement, offset: _offset, ...props }) => {
   let { tooltipProps } = useTooltip(props, state)
+  const tooltipRef = useRef<HTMLSpanElement>()
+
+  useEffect(() => {
+    if (!visible || !tooltipRef.current) {
+      return
+    }
+
+    let offset = generateOffset({
+      initial: placementOffset[placement](_offset),
+      offset: parentOffset[placement](tooltipRef.current),
+    })
+
+    const changeOffset = (offset: Offset) => {
+      tooltipRef.current.style.top = offset.top + 'px'
+      tooltipRef.current.style.left = offset.left + 'px'
+      tooltipRef.current.style.right = offset.right + 'px'
+      tooltipRef.current.style.bottom = offset.bottom + 'px'
+    }
+
+    tooltipRef.current.style.opacity = '0'
+    changeOffset(offset)
+
+    const tooltipRect = tooltipRef.current.getBoundingClientRect()
+
+    const { outOfBound, opposite } = offsetOutOfBound[placement](tooltipRect)
+
+    if (outOfBound) {
+      const oppsiteOffset = generateOffset({
+        initial: placementOffset[opposite](_offset),
+        offset: parentOffset[opposite](tooltipRef.current),
+      })
+
+      changeOffset(oppsiteOffset)
+    }
+
+    tooltipRef.current.style.opacity = '1'
+  }, [visible, placement])
 
   return (
     <CssTransition visible={visible} leaveTime={90}>
@@ -25,14 +63,11 @@ const Tooltip = ({ state, visible, style, ...props }) => {
         {...mergeProps(props, tooltipProps)}
         style={{
           position: 'absolute',
-          top: style.top,
           zIndex: 2,
-          bottom: style.bottom,
-          left: style.left,
-          right: style.right,
           height: 'fit-content',
           width: 'fit-content',
         }}
+        ref={tooltipRef}
       >
         {props.children}
       </span>
@@ -83,9 +118,7 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     ...rest
   } = props
 
-  const id = genId()
-
-  const tooltipRef = useRef<HTMLElement>(document.getElementById(id))
+  const tooltipRef = useRef<HTMLElement>()
 
   const [visible, setVisible] = useState(false)
 
@@ -102,23 +135,7 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     tooltipRef,
   )
 
-  const [offset, setOffset] = useState<Offset>({
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  })
-
   const changeVisible = (nextVisible) => {
-    if (nextVisible) {
-      setOffset(
-        generateOffset({
-          initial: placementOffset[placement](_offset),
-          offset: parentOffset[placement](tooltipRef.current),
-        }),
-      )
-    }
-
     setVisible(nextVisible)
   }
 
@@ -171,8 +188,9 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
       <Tooltip
         state={state}
         {...tooltipProps}
+        placement={placement}
         visible={state.isOpen}
-        style={offset}
+        offset={_offset}
       >
         {content}
       </Tooltip>

@@ -1,4 +1,4 @@
-import { Button, Input, ToolTip } from 'fluid'
+import { Button, Input, ToolTip, Link } from 'fluid'
 
 function App() {
   return (
@@ -20,27 +20,59 @@ function App() {
           Button
         </Button>
 
-        <ToolTip content={'Tooltip'}>
-          <Button>Hover</Button>
-        </ToolTip>
+        <div>
+          <ToolTip content={'Tooltip'}>
+            <Button>Hover</Button>
+          </ToolTip>
+        </div>
 
         <ToolTip content={'Tooltip'} trigger={'click'}>
           <Button>click</Button>
         </ToolTip>
 
+        <div>
+          <ToolTip content={'Tooltip'} placement={'left'}>
+            <Button>left</Button>
+          </ToolTip>
+        </div>
+
         <ToolTip content={'Tooltip'} placement={'bottom'}>
           <Button>bottom</Button>
         </ToolTip>
       </div>
+
+      <Link />
       <div
         style={{
           marginLeft: 100,
         }}
       >
-        <ToolTip content={'Tooltip'} placement={'right'} trigger={'click'}>
+        <ToolTip content={'Tooltip'} placement={'right'}>
           <Button>Right</Button>
         </ToolTip>
         <Button>Left</Button>
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+        }}
+      >
+        <ToolTip content={'Tooltip'} placement={'bottom'} trigger={'click'}>
+          <Button>bottom</Button>
+        </ToolTip>
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+        }}
+      >
+        <ToolTip content={'Tooltip'} placement={'top'} trigger={'click'}>
+          <Button>top</Button>
+        </ToolTip>
       </div>
     </div>
   )

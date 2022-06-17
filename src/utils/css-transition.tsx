@@ -32,9 +32,15 @@ const CssTransition: React.FC<Props> = (props) => {
     }, time)
   }, [visible, show])
 
-  if (!React.isValidElement(children) || !show) return null
-
-  return children
+  return (
+    <div
+      style={{
+        opacity: visible ? 1 : 0,
+      }}
+    >
+      {children}
+    </div>
+  )
 }
 
 export default withDefault(CssTransition, defaultProps)
