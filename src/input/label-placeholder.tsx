@@ -4,10 +4,10 @@ import { styled } from '../theme/stitches.config'
 const StyledLabelPlaceHolder = styled(`label`, {
   position: 'absolute',
   color: '$gray600',
-  fontSize: '$xs',
+  fontSize: '$md',
   zIndex: 2,
   left: 6,
-  top: 20,
+  top: 17,
   cursor: 'auto',
 
   '&.input-focus': {
@@ -18,7 +18,7 @@ const StyledLabelPlaceHolder = styled(`label`, {
 })
 
 const PlaceHolderGap = styled(`div`, {
-  height: `$xs`,
+  height: `$md`,
 })
 
 interface Props

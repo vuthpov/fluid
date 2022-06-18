@@ -17,7 +17,7 @@ const EmptyBar = styled(Container, {
 })
 
 const FilledBar = styled(Container, {
-  background: 'red',
+  background: '$primary',
   left: 0,
   top: 0,
 })

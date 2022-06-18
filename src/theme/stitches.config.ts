@@ -14,13 +14,13 @@ export const {
     colors: {
       hiContrast: "hsl(206,10%,5%)",
       loContrast: "white",
-
       gray100: "hsl(206,22%,99%)",
       gray200: "hsl(206,12%,97%)",
       gray300: "hsl(206,11%,92%)",
       gray400: "hsl(206,10%,84%)",
       gray500: "hsl(206,10%,76%)",
       gray600: "hsl(206,10%,44%)",
+      primary: "crimson",
     },
     fontSizes: {
       xs: "0.75rem",
@@ -39,10 +39,14 @@ export const {
       xl9: "8rem",
     },
     sizes: {
-      xs: "1rem",
+      md: "1rem",
+      xs: "0.5rem",
     },
     space: {
-      xs: "1rem",
+      md: "1rem",
+    },
+    transitions: {
+      default: "  .4s",
     },
   },
   utils: {
