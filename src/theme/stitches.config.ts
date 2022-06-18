@@ -45,4 +45,9 @@ export const {
       xs: "1rem",
     },
   },
+  utils: {
+    height: (value) => {
+      return { height: value };
+    },
+  },
 });

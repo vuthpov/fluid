@@ -30,6 +30,10 @@ const CssTransition: React.FC<Props> = (props) => {
 
       clearTimeout(timer)
     }, time)
+
+    return () => {
+      clearTimeout(timer)
+    }
   }, [visible, show])
 
   return (

@@ -1,4 +1,4 @@
-import { Button, Input, ToolTip, Link } from 'fluid'
+import { Button, Input, ToolTip, Link, Progress } from 'fluid'
 
 function App() {
   return (
@@ -74,6 +74,8 @@ function App() {
           <Button>top</Button>
         </ToolTip>
       </div>
+
+      <Progress value={60} label={'loading'} />
     </div>
   )
 }

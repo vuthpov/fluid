@@ -89,6 +89,8 @@ interface Props
   children: React.ReactNode
   placement?: PlacementType
   offset?: Offset
+  tooltipContentProps?: any
+  [index: string]: any
 }
 
 type ToolTipProps = Props & ToolTipAria
@@ -115,6 +117,7 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
     trigger,
     placement,
     offset: _offset,
+    tooltipContentProps,
     ...rest
   } = props
 
@@ -173,6 +176,7 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
 
   return (
     <StyledTrigger
+      {...rest}
       {...triggerProps}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -188,6 +192,7 @@ const Wrapper = React.forwardRef((props: ToolTipProps, ref) => {
       <Tooltip
         state={state}
         {...tooltipProps}
+        {...tooltipContentProps}
         placement={placement}
         visible={state.isOpen}
         offset={_offset}
