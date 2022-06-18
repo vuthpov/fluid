@@ -23,6 +23,11 @@ export const StyledSwitch = styled('label', {
     position: 'absolute',
     left: -3,
   },
+
+  '&.disabled': {
+    cursor: 'not-allowed',
+    opacity: 0.5,
+  },
 })
 
 export const Slider = styled('span', {

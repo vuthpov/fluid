@@ -24,6 +24,10 @@ const Switch: React.FC<Props> = (props) => {
     switchClassName = `${switchClassName} focus`
   }
 
+  if (inputProps.disabled) {
+    switchClassName = `${switchClassName} disabled`
+  }
+
   if (className) {
     switchClassName = `${switchClassName} ${className}`
   }
