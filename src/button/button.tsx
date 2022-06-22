@@ -1,11 +1,11 @@
 import React from 'react'
 import { useButton } from '@react-aria/button'
 import type { AriaButtonProps } from '@react-types/button'
-import { styled } from '../theme/stitches.config'
+import { styled, CSS } from '../theme/stitches.config'
 import Ripple from '../ripple'
 import useDrip from '../hooks/useDrip'
 
-interface Props
+export interface Props
   extends Omit<
       React.DetailedHTMLProps<
         React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -17,6 +17,7 @@ interface Props
   as?: keyof JSX.IntrinsicElements
   disabled?: boolean
   loading?: boolean
+  css?: CSS
   [index: string]: any
 }
 
@@ -42,6 +43,7 @@ const Button: React.FC<Props> = (props) => {
     disabled,
     size,
     onClick,
+    css,
     ...rest
   } = props
 
@@ -70,6 +72,7 @@ const Button: React.FC<Props> = (props) => {
       as={elementType}
       size={size}
       ref={buttonRef}
+      css={css}
       {...buttonProps}
       disabled={loading || disabled}
     >

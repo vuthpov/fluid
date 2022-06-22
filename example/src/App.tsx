@@ -1,4 +1,4 @@
-import { Button, Input, ToolTip, Link, Progress, Switch } from 'fluid'
+import { Button, Input, ToolTip, Link, Progress, Switch, Radio } from 'fluid'
 
 function App() {
   return (
@@ -82,6 +82,24 @@ function App() {
           marginTop: 10,
         }}
       />
+
+      <Radio.Group>
+        <Radio value={'a'}>a</Radio>
+
+        <Radio value={'b'}>b</Radio>
+      </Radio.Group>
+
+      <Radio.Group>
+        <Radio.Button value={'a'}>a</Radio.Button>
+
+        <Radio.Button value={'b'}>b</Radio.Button>
+      </Radio.Group>
+
+      <Radio.Group>
+        <Radio.Button value={'a'}>a</Radio.Button>
+        <Radio.Button value={'b'}>b</Radio.Button>
+        <Radio.Button value={'c'}>c</Radio.Button>
+      </Radio.Group>
     </div>
   )
 }

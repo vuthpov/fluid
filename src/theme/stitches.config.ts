@@ -1,15 +1,7 @@
 import { createStitches } from "@stitches/react";
+import type * as Stitches from "@stitches/react";
 
-export const {
-  styled,
-  css,
-  globalCss,
-  keyframes,
-  getCssText,
-  theme,
-  createTheme,
-  config,
-} = createStitches({
+const stitches = createStitches({
   theme: {
     colors: {
       hiContrast: "hsl(206,10%,5%)",
@@ -55,3 +47,31 @@ export const {
     },
   },
 });
+
+const config = stitches.config;
+
+const {
+  styled,
+  createTheme,
+  css,
+  getCssText,
+  globalCss,
+  keyframes,
+  prefix,
+  reset,
+  theme,
+} = stitches;
+
+export {
+  styled,
+  config,
+  createTheme,
+  css,
+  getCssText,
+  globalCss,
+  keyframes,
+  prefix,
+  reset,
+  theme,
+};
+export type CSS = Stitches.CSS<typeof config>;
