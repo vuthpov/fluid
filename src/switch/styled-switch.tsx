@@ -1,5 +1,19 @@
 import { styled } from '../theme/stitches.config'
 
+export const Slider = styled('span', {
+  background: '$loContrast',
+  height: 'calc(100% - 8px)',
+  width: 'calc(50% - 4px)',
+  transform: `translateX(4px)`,
+  display: 'block',
+  transition: '$default',
+
+  '&.on': {
+    left: `unset`,
+    transform: `translateX(calc(100% + 4px))`,
+  },
+})
+
 export const StyledSwitch = styled('label', {
   width: 60,
   height: 30,
@@ -28,18 +42,22 @@ export const StyledSwitch = styled('label', {
     cursor: 'not-allowed',
     opacity: 0.5,
   },
-})
 
-export const Slider = styled('span', {
-  background: '$loContrast',
-  height: 'calc(100% - 8px)',
-  width: 'calc(50% - 4px)',
-  transform: `translateX(4px)`,
-  display: 'block',
-  transition: '$default',
+  variants: {
+    border: {
+      round: {
+        borderRadius: `34px`,
 
-  '&.on': {
-    left: `unset`,
-    transform: `translateX(calc(100% + 4px))`,
+        [`&>${Slider}`]: {
+          borderRadius: `34px`,
+        },
+      },
+      square: {
+        borderRadius: `unset`,
+      },
+    },
+  },
+  defaultVariants: {
+    border: 'square',
   },
 })

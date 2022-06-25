@@ -9,10 +9,12 @@ import { Slider, StyledSwitch } from './styled-switch'
 interface Props extends AriaSwitchProps {
   style?: React.CSSProperties
   className?: string
+  type?: ''
+  border?: 'square' | 'round'
 }
 
 const Switch: React.FC<Props> = (props) => {
-  const { style, className, ...rest } = props
+  const { style, className, border, ...rest } = props
   let state = useToggleState(rest)
   let ref = React.useRef()
   let { inputProps } = useSwitch(rest, state, ref)
@@ -40,6 +42,7 @@ const Switch: React.FC<Props> = (props) => {
       }}
       style={style}
       className={switchClassName}
+      border={border}
     >
       <VisuallyHidden>
         <input {...inputProps} {...focusProps} ref={ref} />

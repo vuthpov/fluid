@@ -8,6 +8,8 @@ function App() {
           labelPlaceHolder={'Username'}
           description={'Please Input Your Username'}
           errorMessage={'error'}
+          // @ts-ignore
+          allowClear={true}
         />
         <Button
           onMouseEnter={(e) => {
@@ -81,6 +83,12 @@ function App() {
         style={{
           marginTop: 10,
         }}
+      />
+      <Switch
+        style={{
+          marginTop: 10,
+        }}
+        border={'round'}
       />
 
       <Radio.Group>

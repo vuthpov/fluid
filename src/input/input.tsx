@@ -1,14 +1,16 @@
-import React, { useImperativeHandle, useRef } from 'react'
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { AriaTextFieldOptions, useTextField } from '@react-aria/textfield'
 import { styled } from '../theme/stitches.config'
 import StyledLabelPlaceHolder from './label-placeholder'
+import ClearButton from './clear-button'
 
 interface Props extends AriaTextFieldOptions<'input'> {
   labelPlaceHolder?: string
   label?: string
+  allowClear?: boolean
 }
 
-const InputContainer = styled(`div`, {
+const InputContainer = styled(`span`, {
   position: 'relative',
 })
 
@@ -17,22 +19,48 @@ const StyledInput = styled(`input`, {
   zIndex: 1,
 })
 
-const Container = styled(`div`, {
+const Container = styled(`span`, {
+  width: 'fit-content',
   display: 'flex',
   flexDirection: 'column',
   height: `calc(100% + 17px)`,
 })
 
 const Input: React.FC<Props> = React.forwardRef((props, ref) => {
-  const { label, labelPlaceHolder, ...rest } = props
+  const {
+    label,
+    labelPlaceHolder,
+    allowClear,
+    defaultValue,
+    value: _value,
+    onChange,
+    ...rest
+  } = props
   let inputRef = React.useRef<HTMLInputElement>(null)
+
+  let [value, setValue] = useState(defaultValue || '')
+
+  useEffect(() => {
+    setValue(value)
+  }, [_value])
 
   let {
     labelProps,
     inputProps,
     descriptionProps,
     errorMessageProps,
-  } = useTextField({ ...rest }, inputRef)
+  } = useTextField(
+    {
+      ...rest,
+      value,
+      onChange: (value) => {
+        setValue(value)
+        onChange?.(value)
+      },
+      defaultValue,
+    },
+    inputRef,
+  )
 
   useImperativeHandle(ref, () => inputRef.current)
 
@@ -51,6 +79,8 @@ const Input: React.FC<Props> = React.forwardRef((props, ref) => {
       labelPlaceHolderRef.current?.classList.remove('input-focus')
     }
   }
+
+  const clearVisible = value !== ''
 
   return (
     <Container>
@@ -72,12 +102,28 @@ const Input: React.FC<Props> = React.forwardRef((props, ref) => {
           </>
         )}
 
-        <StyledInput
-          {...inputProps}
-          ref={inputRef}
-          onClick={onInputClick}
-          onBlur={onInputBlur}
-        />
+        <div
+          style={{
+            position: 'relative',
+          }}
+        >
+          <StyledInput
+            {...inputProps}
+            ref={inputRef}
+            onClick={onInputClick}
+            onBlur={onInputBlur}
+          />
+
+          {allowClear && (
+            <ClearButton
+              clearVisible={clearVisible}
+              onClick={() => {
+                setValue('')
+              }}
+              inputRef={inputRef}
+            />
+          )}
+        </div>
       </InputContainer>
       {props.description && (
         <div {...descriptionProps}>{props.description}</div>
